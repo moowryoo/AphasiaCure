@@ -1,27 +1,48 @@
-import { useTranslation } from 'react-i18next'
 import { categories } from '../data/cards'
 
-export default function CategoryChips({ activeCategory, onCategoryChange }) {
-  const { t } = useTranslation()
+const colorMap = {
+  terracotta: {
+    active: 'bg-terracotta text-white',
+    inactive: 'bg-terracotta/10 border-terracotta/20',
+  },
+  'soft-rose': {
+    active: 'bg-soft-rose text-white',
+    inactive: 'bg-soft-rose/10 border-soft-rose/20',
+  },
+  sky: {
+    active: 'bg-sky text-white',
+    inactive: 'bg-sky/10 border-sky/20',
+  },
+  sage: {
+    active: 'bg-sage text-white',
+    inactive: 'bg-sage/10 border-sage/20',
+  },
+}
 
+export default function CategoryChips({ activeCategory, onCategoryChange }) {
   return (
-    <div className="flex gap-3 overflow-x-auto px-4 py-3 scrollbar-hide">
-      {categories.map((cat) => (
-        <button
-          key={cat.id}
-          onClick={() => onCategoryChange(cat.id)}
-          className={`flex items-center gap-2 px-4 py-2 rounded-full whitespace-nowrap
-                     text-sm font-semibold font-thai transition-all shrink-0
-                     ${
-                       activeCategory === cat.id
-                         ? 'bg-terracotta text-white shadow-md'
-                         : 'bg-gradient-to-b from-cream to-sand text-bark/70 hover:text-bark'
-                     }`}
-        >
-          <span>{cat.emoji}</span>
-          <span>{t(cat.labelKey)}</span>
-        </button>
-      ))}
+    <div className="mx-4 my-3 p-3 bg-sand/80 rounded-2xl">
+      <div className="flex gap-3">
+        {categories.map((cat) => {
+          const isActive = activeCategory === cat.id
+          const colors = colorMap[cat.color]
+
+          return (
+            <button
+              key={cat.id}
+              onClick={() => onCategoryChange(cat.id)}
+              className={`flex-1 flex items-center justify-center py-3 rounded-xl
+                         text-2xl transition-all border-2
+                         ${isActive
+                           ? `${colors.active} shadow-md border-transparent`
+                           : `${colors.inactive}`
+                         }`}
+            >
+              {cat.emoji}
+            </button>
+          )
+        })}
+      </div>
     </div>
   )
 }
