@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
 
 const tabs = [
@@ -8,8 +7,6 @@ const tabs = [
 ]
 
 export default function TabBar({ activeTab, onTabChange }) {
-  const { t } = useTranslation()
-
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-cream/80 backdrop-blur-xl border-t border-sand z-50">
       <div className="flex justify-around items-center h-20 max-w-lg mx-auto">
@@ -19,14 +16,9 @@ export default function TabBar({ activeTab, onTabChange }) {
             onClick={() => onTabChange(tab.id)}
             className="flex flex-col items-center gap-1 px-6 py-2 relative"
           >
-            <span className="text-2xl">{tab.emoji}</span>
-            <span
-              className={`text-xs font-semibold font-thai transition-colors ${
-                activeTab === tab.id ? 'text-terracotta' : 'text-bark/50'
-              }`}
-            >
-              {t(`tabs.${tab.id}`)}
-            </span>
+            <span className={`text-3xl transition-all ${
+              activeTab === tab.id ? 'scale-110' : 'opacity-50'
+            }`}>{tab.emoji}</span>
             {activeTab === tab.id && (
               <motion.div
                 layoutId="activeTab"
