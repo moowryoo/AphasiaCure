@@ -118,7 +118,7 @@ export default function ExerciseScreen() {
   }
 
   return (
-    <div>
+    <div className="flex flex-col h-[calc(100vh-6rem)]">
       <ProgressBar current={questionIndex + 1} total={TOTAL_QUESTIONS} />
 
       <div className="mx-4 mt-4 mb-6">
@@ -141,7 +141,7 @@ export default function ExerciseScreen() {
         </AnimatePresence>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 px-4">
+      <div className="grid grid-cols-2 gap-4 px-4 flex-1 content-center">
         {question.options.map((card, i) => {
           const isCorrect = feedback === 'correct' && card.id === question.answer.id
           const isWrong = wrongId === card.id
