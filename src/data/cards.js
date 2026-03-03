@@ -1,8 +1,8 @@
 export const categories = [
-  { id: 'food', emoji: '🍽️', labelKey: 'categories.food' },
-  { id: 'emotions', emoji: '😊', labelKey: 'categories.emotions' },
-  { id: 'daily', emoji: '🏠', labelKey: 'categories.daily' },
-  { id: 'greetings', emoji: '👋', labelKey: 'categories.greetings' },
+  { id: 'food', emoji: '🍽️', labelKey: 'categories.food', color: 'terracotta' },
+  { id: 'emotions', emoji: '😊', labelKey: 'categories.emotions', color: 'soft-rose' },
+  { id: 'daily', emoji: '🏠', labelKey: 'categories.daily', color: 'sky' },
+  { id: 'greetings', emoji: '👋', labelKey: 'categories.greetings', color: 'sage' },
 ]
 
 export const cards = [
@@ -17,6 +17,16 @@ export const cards = [
   { id: 'milk', emoji: '🥛', th: 'นม', en: 'Milk', category: 'food' },
   { id: 'bread', emoji: '🍞', th: 'ขนมปัง', en: 'Bread', category: 'food' },
   { id: 'medicine', emoji: '💊', th: 'ยา', en: 'Medicine', category: 'food' },
+  { id: 'chicken', emoji: '🍗', th: 'ไก่', en: 'Chicken', category: 'food' },
+  { id: 'fish', emoji: '🐟', th: 'ปลา', en: 'Fish', category: 'food' },
+  { id: 'shrimp', emoji: '🦐', th: 'กุ้ง', en: 'Shrimp', category: 'food' },
+  { id: 'pork', emoji: '🥩', th: 'หมู', en: 'Pork', category: 'food' },
+  { id: 'mango', emoji: '🥭', th: 'มะม่วง', en: 'Mango', category: 'food' },
+  { id: 'watermelon', emoji: '🍉', th: 'แตงโม', en: 'Watermelon', category: 'food' },
+  { id: 'orange', emoji: '🍊', th: 'ส้ม', en: 'Orange', category: 'food' },
+  { id: 'grape', emoji: '🍇', th: 'องุ่น', en: 'Grape', category: 'food' },
+  { id: 'soup', emoji: '🍲', th: 'ซุป', en: 'Soup', category: 'food' },
+  { id: 'icecream', emoji: '🍦', th: 'ไอศกรีม', en: 'Ice cream', category: 'food' },
 
   // Emotions
   { id: 'happy', emoji: '😊', th: 'ดีใจ', en: 'Happy', category: 'emotions' },
