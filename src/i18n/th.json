@@ -8,7 +8,8 @@
     "food": "อาหารและเครื่องดื่ม",
     "emotions": "อารมณ์",
     "daily": "กิจวัตรประจำวัน",
-    "greetings": "ทักทาย"
+    "greetings": "ทักทาย",
+    "custom": "กำหนดเอง"
   },
   "communicate": {
     "messagePlaceholder": "แตะการ์ดเพื่อสื่อสาร...",

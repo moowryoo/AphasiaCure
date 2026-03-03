@@ -3,6 +3,7 @@ export const categories = [
   { id: 'emotions', emoji: '😊', labelKey: 'categories.emotions', color: 'soft-rose' },
   { id: 'daily', emoji: '🏠', labelKey: 'categories.daily', color: 'sky' },
   { id: 'greetings', emoji: '👋', labelKey: 'categories.greetings', color: 'sage' },
+  { id: 'custom', emoji: '⭐', labelKey: 'categories.custom', color: 'bark' },
 ]
 
 export const cards = [
@@ -37,6 +38,16 @@ export const cards = [
   { id: 'pain', emoji: '🤒', th: 'เจ็บ', en: 'Pain', category: 'emotions' },
   { id: 'love', emoji: '🥰', th: 'รัก', en: 'Love', category: 'emotions' },
   { id: 'neutral', emoji: '😐', th: 'เฉยๆ', en: 'Neutral', category: 'emotions' },
+  { id: 'hungry', emoji: '🤤', th: 'หิว', en: 'Hungry', category: 'emotions' },
+  { id: 'thirsty', emoji: '🥤', th: 'กระหาย', en: 'Thirsty', category: 'emotions' },
+  { id: 'hot', emoji: '🥵', th: 'ร้อน', en: 'Hot', category: 'emotions' },
+  { id: 'cold', emoji: '🥶', th: 'หนาว', en: 'Cold', category: 'emotions' },
+  { id: 'bored', emoji: '😑', th: 'เบื่อ', en: 'Bored', category: 'emotions' },
+  { id: 'worried', emoji: '😟', th: 'กังวล', en: 'Worried', category: 'emotions' },
+  { id: 'confused', emoji: '😕', th: 'สับสน', en: 'Confused', category: 'emotions' },
+  { id: 'lonely', emoji: '🥺', th: 'เหงา', en: 'Lonely', category: 'emotions' },
+  { id: 'surprised', emoji: '😲', th: 'ตกใจ', en: 'Surprised', category: 'emotions' },
+  { id: 'shy', emoji: '😳', th: 'อาย', en: 'Shy', category: 'emotions' },
 
   // Daily Needs
   { id: 'bathroom', emoji: '🚽', th: 'ห้องน้ำ', en: 'Bathroom', category: 'daily' },
@@ -49,6 +60,8 @@ export const cards = [
   { id: 'tv', emoji: '📺', th: 'ทีวี', en: 'TV', category: 'daily' },
   { id: 'phone', emoji: '📱', th: 'โทรศัพท์', en: 'Phone', category: 'daily' },
   { id: 'key', emoji: '🔑', th: 'กุญแจ', en: 'Key', category: 'daily' },
+  { id: 'light-on', emoji: '💡', th: 'เปิดไฟ', en: 'Turn on light', category: 'daily' },
+  { id: 'light-off', emoji: '🔦', th: 'ปิดไฟ', en: 'Turn off light', category: 'daily' },
 
   // Greetings & Responses
   { id: 'hello', emoji: '👋', th: 'สวัสดี', en: 'Hello', category: 'greetings' },
@@ -59,4 +72,5 @@ export const cards = [
   { id: 'goodbye', emoji: '👋', th: 'ลาก่อน', en: 'Goodbye', category: 'greetings' },
   { id: 'good', emoji: '👍', th: 'ดี', en: 'Good', category: 'greetings' },
   { id: 'sorry', emoji: '🤝', th: 'ขอโทษ', en: 'Sorry', category: 'greetings' },
+  { id: 'miss-you', emoji: '🥹', th: 'คิดถึง', en: 'Miss you', category: 'greetings' },
 ]

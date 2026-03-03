@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cards } from '../data/cards'
 import ProgressBar from '../components/ProgressBar'
+import { speakCard } from '../utils/speak'
 
 const TOTAL_QUESTIONS = 10
 
@@ -43,6 +44,7 @@ export default function ExerciseScreen() {
 
   const handleChoice = (card) => {
     if (feedback === 'correct') return
+    speakCard(card, lang)
 
     if (card.id === question.answer.id) {
       setFeedback('correct')

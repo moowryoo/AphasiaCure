@@ -17,11 +17,15 @@ const colorMap = {
     active: 'bg-sage text-white',
     inactive: 'bg-sage/25 border-sage/40',
   },
+  bark: {
+    active: 'bg-bark text-white',
+    inactive: 'bg-bark/25 border-bark/40',
+  },
 }
 
 export default function CategoryChips({ activeCategory, onCategoryChange }) {
   return (
-    <div className="mx-4 my-3 p-3 bg-sand rounded-2xl">
+    <div>
       <div className="flex gap-3">
         {categories.map((cat) => {
           const isActive = activeCategory === cat.id

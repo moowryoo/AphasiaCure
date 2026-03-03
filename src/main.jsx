@@ -4,8 +4,15 @@ import './i18n'
 import './index.css'
 import App from './App.jsx'
 
-createRoot(document.getElementById('root')).render(
+const root = document.getElementById('root')
+
+createRoot(root).render(
   <StrictMode>
     <App />
   </StrictMode>,
 )
+
+// Hide content until fonts are loaded to prevent font-swap CLS
+document.fonts.ready.then(() => {
+  root.style.visibility = 'visible'
+})

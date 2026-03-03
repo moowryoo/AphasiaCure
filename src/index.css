@@ -3,6 +3,7 @@
 @theme {
   --color-cream: #FFF8F0;
   --color-sand: #F5E6D3;
+  --color-sand-dark: #E8D5BE;
   --color-terracotta: #D4845A;
   --color-sage: #8BAA7C;
   --color-soft-rose: #E8A0A0;
@@ -44,4 +45,13 @@ body::after {
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+@keyframes border-fill {
+  0% { border-color: transparent; box-shadow: inset 0 2px 4px rgba(212,132,90,0.2), 0 4px 16px rgba(212,132,90,0.15); }
+  100% { border-color: #E8A0A0; box-shadow: inset 0 2px 4px rgba(232,160,160,0.3), 0 4px 16px rgba(232,160,160,0.25); }
+}
+
+.animate-border-fill {
+  animation: border-fill 6s linear forwards;
 }

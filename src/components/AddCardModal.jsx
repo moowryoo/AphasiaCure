@@ -2,6 +2,7 @@ import { useState, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import EmojiPicker from './EmojiPicker'
 import { resizeImage, uploadImage, proxyImageUrl } from '../utils/customCardStore'
+import { speakCard } from '../utils/speak'
 
 export default function AddCardModal({ onSave, onClose }) {
   const [step, setStep] = useState(1)
@@ -9,11 +10,9 @@ export default function AddCardModal({ onSave, onClose }) {
   const [photoURL, setPhotoURL] = useState(null)
   const [isUploading, setIsUploading] = useState(false)
   const [uploadError, setUploadError] = useState(null)
-  const [audioDataURL, setAudioDataURL] = useState(null)
+  const [thLabel, setThLabel] = useState('')
+  const [enLabel, setEnLabel] = useState('')
   const [showEmojiPicker, setShowEmojiPicker] = useState(false)
-  const [isRecording, setIsRecording] = useState(false)
-  const mediaRecorderRef = useRef(null)
-  const chunksRef = useRef([])
   const fileInputRef = useRef(null)
   const cameraInputRef = useRef(null)
 
@@ -42,45 +41,15 @@ export default function AddCardModal({ onSave, onClose }) {
     setStep(2)
   }
 
-  const startRecording = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
-      const mediaRecorder = new MediaRecorder(stream)
-      mediaRecorderRef.current = mediaRecorder
-      chunksRef.current = []
+  const hasLabel = thLabel.trim() || enLabel.trim()
 
-      mediaRecorder.ondataavailable = (e) => {
-        if (e.data.size > 0) chunksRef.current.push(e.data)
-      }
-
-      mediaRecorder.onstop = () => {
-        const blob = new Blob(chunksRef.current, { type: 'audio/webm' })
-        stream.getTracks().forEach((t) => t.stop())
-        const reader = new FileReader()
-        reader.onloadend = () => {
-          setAudioDataURL(reader.result)
-        }
-        reader.readAsDataURL(blob)
-      }
-
-      mediaRecorder.start()
-      setIsRecording(true)
-    } catch {
-      // Microphone permission denied
-    }
-  }
-
-  const stopRecording = () => {
-    mediaRecorderRef.current?.stop()
-    setIsRecording(false)
-  }
-
-  const playAudio = () => {
-    if (audioDataURL) new Audio(audioDataURL).play()
+  const previewSpeak = () => {
+    const card = { th: thLabel.trim(), en: enLabel.trim() }
+    speakCard(card, thLabel.trim() ? 'th' : 'en')
   }
 
   const handleSave = () => {
-    onSave({ emoji, photoURL, audioDataURL })
+    onSave({ emoji, photoURL, th: thLabel.trim(), en: enLabel.trim() })
   }
 
   return (
@@ -175,17 +144,14 @@ export default function AddCardModal({ onSave, onClose }) {
                 </motion.div>
               )}
 
-              {isUploading && (
-                <div className="flex items-center justify-center py-4">
+              <div className="h-14 flex items-center justify-center">
+                {isUploading && (
                   <div className="w-10 h-10 border-4 border-terracotta/30 border-t-terracotta rounded-full animate-spin" />
-                </div>
-              )}
-
-              {uploadError && (
-                <div className="text-center text-soft-rose text-lg py-2">
-                  ⚠️
-                </div>
-              )}
+                )}
+                {uploadError && (
+                  <span className="text-soft-rose text-lg">⚠️</span>
+                )}
+              </div>
             </motion.div>
           )}
 
@@ -195,7 +161,7 @@ export default function AddCardModal({ onSave, onClose }) {
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -50 }}
-              className="flex flex-col items-center gap-8"
+              className="flex flex-col items-center gap-6 w-full max-w-sm"
             >
               {/* Preview of chosen image/emoji */}
               <div className="w-28 h-28 bg-sand/60 rounded-2xl flex items-center justify-center
@@ -207,43 +173,53 @@ export default function AddCardModal({ onSave, onClose }) {
                 )}
               </div>
 
-              {/* Record button */}
-              <motion.button
-                whileTap={{ scale: 0.95 }}
-                onClick={isRecording ? stopRecording : startRecording}
-                className={`w-28 h-28 rounded-full flex items-center justify-center text-5xl
-                           shadow-lg transition-colors ${
-                             isRecording
-                               ? 'bg-soft-rose animate-pulse'
-                               : audioDataURL
-                                 ? 'bg-sage'
-                                 : 'bg-terracotta'
-                           }`}
-              >
-                {isRecording ? '⏹️' : '🎙️'}
-              </motion.button>
+              {/* Text inputs for labels */}
+              <input
+                type="text"
+                value={thLabel}
+                onChange={(e) => setThLabel(e.target.value)}
+                placeholder="ชื่อภาษาไทย"
+                className="w-full px-4 py-3 bg-sand/60 rounded-2xl text-bark text-lg text-center
+                           font-thai placeholder:text-bark/40 outline-none
+                           border-2 border-transparent focus:border-terracotta/30
+                           shadow-[inset_0_2px_4px_rgba(255,248,240,0.8),0_2px_8px_rgba(92,64,51,0.08)]"
+              />
+              <input
+                type="text"
+                value={enLabel}
+                onChange={(e) => setEnLabel(e.target.value)}
+                placeholder="English name"
+                className="w-full px-4 py-3 bg-sand/60 rounded-2xl text-bark text-lg text-center
+                           font-display placeholder:text-bark/40 outline-none
+                           border-2 border-transparent focus:border-terracotta/30
+                           shadow-[inset_0_2px_4px_rgba(255,248,240,0.8),0_2px_8px_rgba(92,64,51,0.08)]"
+              />
 
-              {/* Playback + next */}
-              {audioDataURL && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="flex gap-4"
-                >
-                  <button
-                    onClick={playAudio}
+              {/* TTS preview + next */}
+              <div className="flex gap-4">
+                {hasLabel && (
+                  <motion.button
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={previewSpeak}
                     className="w-14 h-14 rounded-full bg-sky flex items-center justify-center text-2xl shadow-md"
                   >
-                    ▶️
-                  </button>
-                  <button
+                    🔊
+                  </motion.button>
+                )}
+                {hasLabel && (
+                  <motion.button
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    whileTap={{ scale: 0.95 }}
                     onClick={() => setStep(3)}
                     className="w-14 h-14 rounded-full bg-sage flex items-center justify-center text-2xl shadow-md text-white"
                   >
                     →
-                  </button>
-                </motion.div>
-              )}
+                  </motion.button>
+                )}
+              </div>
             </motion.div>
           )}
 
@@ -265,10 +241,10 @@ export default function AddCardModal({ onSave, onClose }) {
                   <span className="text-7xl">{emoji}</span>
                 )}
                 <button
-                  onClick={playAudio}
+                  onClick={previewSpeak}
                   className="w-10 h-10 rounded-full bg-sky/80 flex items-center justify-center text-lg shadow"
                 >
-                  ▶️
+                  🔊
                 </button>
               </div>
 

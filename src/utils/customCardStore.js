@@ -1,26 +1,4 @@
-const STORAGE_KEY = 'customCards'
-
-export function getCustomCards() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY)
-    return raw ? JSON.parse(raw) : []
-  } catch {
-    return []
-  }
-}
-
-export function saveCustomCard(card) {
-  const cards = getCustomCards()
-  cards.push(card)
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(cards))
-}
-
-export function deleteCustomCard(id) {
-  const cards = getCustomCards().filter((c) => c.id !== id)
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(cards))
-}
-
-export function resizeImage(file, maxSize = 800) {
+export function resizeImage(file, maxSize = 800, maxBytes = 2 * 1024 * 1024) {
   return new Promise((resolve) => {
     const img = new Image()
     const reader = new FileReader()
@@ -36,7 +14,17 @@ export function resizeImage(file, maxSize = 800) {
         canvas.width = width
         canvas.height = height
         canvas.getContext('2d').drawImage(img, 0, 0, width, height)
-        canvas.toBlob((blob) => resolve(blob), 'image/jpeg', 0.8)
+
+        const tryQuality = (quality) => {
+          canvas.toBlob((blob) => {
+            if (blob.size <= maxBytes || quality <= 0.1) {
+              resolve(blob)
+            } else {
+              tryQuality(Math.max(0.1, quality - 0.1))
+            }
+          }, 'image/jpeg', quality)
+        }
+        tryQuality(0.8)
       }
       img.src = e.target.result
     }
@@ -73,4 +61,27 @@ export async function deleteImage(url) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ url }),
   }).catch(() => {})
+}
+
+export async function fetchCardsFromAPI() {
+  const res = await fetch('/api/cards')
+  if (!res.ok) throw new Error('Failed to fetch cards')
+  const data = await res.json()
+  return data.cards || []
+}
+
+export async function addCardToAPI(card) {
+  const res = await fetch('/api/cards', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(card),
+  })
+  if (!res.ok) throw new Error('Failed to add card')
+}
+
+export async function deleteCardFromAPI(id) {
+  const res = await fetch(`/api/cards?id=${encodeURIComponent(id)}`, {
+    method: 'DELETE',
+  })
+  if (!res.ok) throw new Error('Failed to delete card')
 }
