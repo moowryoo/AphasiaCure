@@ -71,16 +71,13 @@ export default function ExerciseScreen() {
 
   if (completed) {
     return (
-      <div className="flex flex-col items-center justify-center h-[80vh] gap-6 px-4">
+      <div className="flex flex-col items-center justify-center h-[80vh] gap-8 px-4">
         <motion.div
           initial={{ scale: 0.5, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           className="text-center"
         >
-          <p className="text-6xl mb-4">🎉</p>
-          <h2 className="text-3xl font-bold text-bark font-thai mb-2">
-            {t('exercise.complete')}
-          </h2>
+          <p className="text-8xl mb-4">🎉</p>
         </motion.div>
         <div className="fixed inset-0 pointer-events-none overflow-hidden">
           {Array.from({ length: 12 }).map((_, i) => (
@@ -110,10 +107,11 @@ export default function ExerciseScreen() {
         <motion.button
           whileTap={{ scale: 0.95 }}
           onClick={handlePlayAgain}
-          className="bg-terracotta text-white font-bold font-thai text-lg
-                     px-8 py-4 rounded-2xl shadow-lg"
+          className="bg-terracotta text-white text-5xl
+                     w-24 h-24 rounded-full shadow-lg
+                     flex items-center justify-center"
         >
-          {t('exercise.playAgain')}
+          🔄
         </motion.button>
       </div>
     )
@@ -143,7 +141,7 @@ export default function ExerciseScreen() {
         </AnimatePresence>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 px-4 max-w-lg mx-auto">
+      <div className="grid grid-cols-2 gap-4 px-4">
         {question.options.map((card, i) => {
           const isCorrect = feedback === 'correct' && card.id === question.answer.id
           const isWrong = wrongId === card.id
@@ -165,7 +163,7 @@ export default function ExerciseScreen() {
               whileTap={{ scale: 1.05 }}
               onClick={() => handleChoice(card)}
               className={`rounded-2xl p-6 flex flex-col items-center gap-3
-                         min-h-[140px] md:min-h-[180px] cursor-pointer
+                         min-h-[180px] md:min-h-[220px] cursor-pointer
                          shadow-[inset_0_2px_4px_rgba(255,248,240,0.8),0_2px_8px_rgba(92,64,51,0.08)]
                          transition-colors border-2
                          ${
@@ -176,7 +174,7 @@ export default function ExerciseScreen() {
                              : 'bg-sand/60 border-transparent hover:border-terracotta/30'
                          }`}
             >
-              <span className="text-[48px] md:text-[64px] leading-none">
+              <span className="text-[72px] md:text-[96px] leading-none">
                 {card.emoji}
               </span>
               {isCorrect && (
