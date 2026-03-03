@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import EmojiPicker from './EmojiPicker'
-import { resizeImage, uploadImage } from '../utils/customCardStore'
+import { resizeImage, uploadImage, proxyImageUrl } from '../utils/customCardStore'
 
 export default function AddCardModal({ onSave, onClose }) {
   const [step, setStep] = useState(1)
@@ -201,7 +201,7 @@ export default function AddCardModal({ onSave, onClose }) {
               <div className="w-28 h-28 bg-sand/60 rounded-2xl flex items-center justify-center
                               shadow-[inset_0_2px_4px_rgba(255,248,240,0.8),0_2px_8px_rgba(92,64,51,0.08)]">
                 {photoURL ? (
-                  <img src={photoURL} alt="" className="w-20 h-20 rounded-xl object-cover" />
+                  <img src={proxyImageUrl(photoURL)} alt="" className="w-20 h-20 rounded-xl object-cover" />
                 ) : (
                   <span className="text-6xl">{emoji}</span>
                 )}
@@ -260,7 +260,7 @@ export default function AddCardModal({ onSave, onClose }) {
                               shadow-[inset_0_2px_4px_rgba(255,248,240,0.8),0_2px_8px_rgba(92,64,51,0.08)]
                               min-w-[160px]">
                 {photoURL ? (
-                  <img src={photoURL} alt="" className="w-24 h-24 rounded-xl object-cover" />
+                  <img src={proxyImageUrl(photoURL)} alt="" className="w-24 h-24 rounded-xl object-cover" />
                 ) : (
                   <span className="text-7xl">{emoji}</span>
                 )}

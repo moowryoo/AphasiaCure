@@ -61,6 +61,11 @@ export async function uploadImage(blob) {
   return data.url
 }
 
+export function proxyImageUrl(url) {
+  if (!url) return null
+  return `/api/image?url=${encodeURIComponent(url)}`
+}
+
 export async function deleteImage(url) {
   if (!url) return
   await fetch('/api/upload', {

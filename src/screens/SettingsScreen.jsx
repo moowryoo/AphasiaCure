@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { motion, AnimatePresence } from 'framer-motion'
 import useCustomCards from '../hooks/useCustomCards'
+import { proxyImageUrl } from '../utils/customCardStore'
 
 const languages = [
   { code: 'th', flag: '🇹🇭' },
@@ -78,7 +79,7 @@ export default function SettingsScreen() {
                                   shadow-[inset_0_2px_4px_rgba(255,248,240,0.8),0_2px_8px_rgba(92,64,51,0.08)]
                                   min-h-[100px]">
                     {card.photoURL ? (
-                      <img src={card.photoURL} alt="" className="w-16 h-16 rounded-xl object-cover" />
+                      <img src={proxyImageUrl(card.photoURL)} alt="" className="w-16 h-16 rounded-xl object-cover" />
                     ) : (
                       <span className="text-4xl">{card.emoji}</span>
                     )}

@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { speakCard } from '../utils/speak'
+import { proxyImageUrl } from '../utils/customCardStore'
 
 export default function MessageBar({ selectedCards, onClear, lang, onCardTap }) {
   const handleTap = (card) => {
@@ -30,7 +31,7 @@ export default function MessageBar({ selectedCards, onClear, lang, onCardTap }) 
                              px-3 py-1.5 rounded-full text-2xl cursor-pointer"
                 >
                   {card.photoURL ? (
-                    <img src={card.photoURL} alt="" className="w-8 h-8 rounded-full object-cover" />
+                    <img src={proxyImageUrl(card.photoURL)} alt="" className="w-8 h-8 rounded-full object-cover" />
                   ) : (
                     card.emoji
                   )}
