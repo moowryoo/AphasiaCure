@@ -1,13 +1,17 @@
 import { put, del } from '@vercel/blob';
 
 export default async function handler(req, res) {
-  if (req.method === 'POST') {
-    return handleUpload(req, res);
+  try {
+    if (req.method === 'POST') {
+      return await handleUpload(req, res);
+    }
+    if (req.method === 'DELETE') {
+      return await handleDelete(req, res);
+    }
+    return res.status(405).json({ error: 'Method not allowed' });
+  } catch (err) {
+    return res.status(500).json({ error: err.message || 'Internal server error' });
   }
-  if (req.method === 'DELETE') {
-    return handleDelete(req, res);
-  }
-  return res.status(405).json({ error: 'Method not allowed' });
 }
 
 async function handleUpload(req, res) {
@@ -23,7 +27,14 @@ async function handleUpload(req, res) {
 
   const filename = req.headers['x-filename'] || 'photo.jpg';
 
-  const blob = await put(`cards/${filename}`, req, {
+  // Buffer the body instead of streaming req directly
+  const chunks = [];
+  for await (const chunk of req) {
+    chunks.push(chunk);
+  }
+  const body = Buffer.concat(chunks);
+
+  const blob = await put(`cards/${filename}`, body, {
     access: 'public',
     addRandomSuffix: true,
     contentType,
@@ -33,13 +44,11 @@ async function handleUpload(req, res) {
 }
 
 async function handleDelete(req, res) {
-  const body = await new Promise((resolve) => {
-    let data = '';
-    req.on('data', (chunk) => { data += chunk; });
-    req.on('end', () => {
-      try { resolve(JSON.parse(data)); } catch { resolve({}); }
-    });
-  });
+  const chunks = [];
+  for await (const chunk of req) {
+    chunks.push(chunk);
+  }
+  const body = JSON.parse(Buffer.concat(chunks).toString());
 
   const { url } = body;
   if (!url) {
