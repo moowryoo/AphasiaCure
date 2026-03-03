@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #FFF8F0;
+  --color-sand: #F5E6D3;
+  --color-terracotta: #D4845A;
+  --color-sage: #8BAA7C;
+  --color-soft-rose: #E8A0A0;
+  --color-bark: #5C4033;
+  --color-sky: #A8C8E8;
+  --font-display: 'Nunito', sans-serif;
+  --font-thai: 'Noto Sans Thai', sans-serif;
+}
