@@ -11,7 +11,11 @@ export default function Card({ card, onClick }) {
                  transition-colors cursor-pointer min-h-[120px] md:min-h-[140px]
                  active:shadow-[inset_0_2px_4px_rgba(212,132,90,0.2),0_4px_16px_rgba(212,132,90,0.15)]"
     >
-      <span className="text-[48px] md:text-[64px] leading-none">{card.emoji}</span>
+      {card.photoURL ? (
+        <img src={card.photoURL} alt="" className="w-20 h-20 md:w-24 md:h-24 rounded-xl object-cover" />
+      ) : (
+        <span className="text-[48px] md:text-[64px] leading-none">{card.emoji}</span>
+      )}
     </motion.button>
   )
 }
