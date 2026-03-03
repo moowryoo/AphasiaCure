@@ -35,7 +35,7 @@ async function handleUpload(req, res) {
   const body = Buffer.concat(chunks);
 
   const blob = await put(`cards/${filename}`, body, {
-    access: 'public',
+    access: 'private',
     addRandomSuffix: true,
     contentType,
   });
