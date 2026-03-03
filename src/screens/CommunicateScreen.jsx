@@ -25,14 +25,13 @@ export default function CommunicateScreen() {
         activeCategory={activeCategory}
         onCategoryChange={setActiveCategory}
       />
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 px-4 pt-3">
+      <div className="grid grid-cols-3 md:grid-cols-4 gap-4 px-4 pt-3">
         {filteredCards.map((card, i) => (
           <Card
             key={card.id}
             card={card}
             onClick={handleCardTap}
             index={i}
-            showBothLanguages={true}
           />
         ))}
       </div>
