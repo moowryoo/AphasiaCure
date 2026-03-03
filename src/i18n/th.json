@@ -1,0 +1,29 @@
+{
+  "tabs": {
+    "communicate": "สื่อสาร",
+    "exercise": "ฝึกฝน",
+    "settings": "ตั้งค่า"
+  },
+  "categories": {
+    "food": "อาหารและเครื่องดื่ม",
+    "emotions": "อารมณ์",
+    "daily": "กิจวัตรประจำวัน",
+    "greetings": "ทักทาย"
+  },
+  "communicate": {
+    "messagePlaceholder": "แตะการ์ดเพื่อสื่อสาร...",
+    "clear": "ล้าง"
+  },
+  "exercise": {
+    "prompt": "หารูปภาพที่ตรงกัน",
+    "correct": "ถูกต้อง!",
+    "tryAgain": "ลองอีกครั้ง",
+    "complete": "เก่งมาก!",
+    "playAgain": "เล่นอีกครั้ง",
+    "progress": "{{current}} / {{total}}"
+  },
+  "settings": {
+    "title": "ตั้งค่า",
+    "language": "ภาษา"
+  }
+}

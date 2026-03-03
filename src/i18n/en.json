@@ -1,0 +1,29 @@
+{
+  "tabs": {
+    "communicate": "Communicate",
+    "exercise": "Exercise",
+    "settings": "Settings"
+  },
+  "categories": {
+    "food": "Food & Drink",
+    "emotions": "Emotions",
+    "daily": "Daily Needs",
+    "greetings": "Greetings"
+  },
+  "communicate": {
+    "messagePlaceholder": "Tap cards to communicate...",
+    "clear": "Clear"
+  },
+  "exercise": {
+    "prompt": "Find the matching image",
+    "correct": "Correct!",
+    "tryAgain": "Try again",
+    "complete": "Great job!",
+    "playAgain": "Play Again",
+    "progress": "{{current}} / {{total}}"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language"
+  }
+}
