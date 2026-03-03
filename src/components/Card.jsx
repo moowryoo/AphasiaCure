@@ -1,11 +1,8 @@
 import { motion } from 'framer-motion'
 
-export default function Card({ card, onClick, index = 0 }) {
+export default function Card({ card, onClick }) {
   return (
     <motion.button
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.05, duration: 0.3 }}
       whileTap={{ scale: 1.05 }}
       onClick={() => onClick(card)}
       className="bg-sand/60 rounded-2xl p-4 flex items-center justify-center
