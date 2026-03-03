@@ -3,6 +3,7 @@ export const categories = [
   { id: 'emotions', emoji: '😊', labelKey: 'categories.emotions', color: 'soft-rose' },
   { id: 'daily', emoji: '🏠', labelKey: 'categories.daily', color: 'sky' },
   { id: 'greetings', emoji: '👋', labelKey: 'categories.greetings', color: 'sage' },
+  { id: 'body', emoji: '🫀', labelKey: 'categories.body', color: 'sage' },
   { id: 'custom', emoji: '⭐', labelKey: 'categories.custom', color: 'bark' },
 ]
 
@@ -73,4 +74,16 @@ export const cards = [
   { id: 'good', emoji: '👍', th: 'ดี', en: 'Good', category: 'greetings' },
   { id: 'sorry', emoji: '🤝', th: 'ขอโทษ', en: 'Sorry', category: 'greetings' },
   { id: 'miss-you', emoji: '🥹', th: 'คิดถึง', en: 'Miss you', category: 'greetings' },
+
+  // Body Parts
+  { id: 'hand', emoji: '✋', th: 'มือ', en: 'Hand', category: 'body' },
+  { id: 'foot', emoji: '🦶', th: 'เท้า', en: 'Foot', category: 'body' },
+  { id: 'head', emoji: '🗣️', th: 'หัว', en: 'Head', category: 'body' },
+  { id: 'eye', emoji: '👁️', th: 'ตา', en: 'Eye', category: 'body' },
+  { id: 'ear', emoji: '👂', th: 'หู', en: 'Ear', category: 'body' },
+  { id: 'nose', emoji: '👃', th: 'จมูก', en: 'Nose', category: 'body' },
+  { id: 'mouth', emoji: '👄', th: 'ปาก', en: 'Mouth', category: 'body' },
+  { id: 'arm', emoji: '💪', th: 'แขน', en: 'Arm', category: 'body' },
+  { id: 'leg', emoji: '🦵', th: 'ขา', en: 'Leg', category: 'body' },
+  { id: 'stomach', emoji: '🫃', th: 'ท้อง', en: 'Stomach', category: 'body' },
 ]
